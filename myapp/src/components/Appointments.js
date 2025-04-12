@@ -6,8 +6,8 @@ import React,
 } from 'react';
 import axios from 'axios';
 import AppointmentCard
-    from './AppointmentCard';
-import './Appointment.css'
+    from './AppointmentCards';
+// import './Appointment.css'
 
 const Appointments = () => {
     const [appointments, setAppointments] = useState([]);
