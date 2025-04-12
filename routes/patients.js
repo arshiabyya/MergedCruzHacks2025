@@ -5,37 +5,37 @@ const router = express.Router();
 const Patient = require('../models/Patient');
 
 // Get all patients
-router.route('/').get((req, res) =&gt; {
+router.route('/').get((req, res) => {
     Patient.find()
-        .then(patients =&gt;
+        .then(patients =>
             res.json(patients))
-        .catch(err =&gt;
+        .catch(err =>
             res.status(400)
                 .json('Error: ' + err));
 });
 
 // Add new patient
 router.route('/add')
-    .post((req, res) =&gt; {
+    .post((req, res) => {
         const { name, age, gender } = req.body;
 
         const newPatient =
             new Patient({ name, age, gender });
 
         newPatient.save()
-            .then(savedPatient =&gt;
+            .then(savedPatient =>
                 res.json(savedPatient))
-            .catch(err =&gt; res.status(400)
+            .catch(err => res.status(400)
                 .json('Error: ' + err));
     });
 
 // Update patient data
 router.route('/update/:id')
-    .post((req, res) =&gt; {
+    .post((req, res) => {
         console.log('hihhhhiuhiihihiuhiuh');
 
         Patient.findById(req.params.id)
-            .then(patient =&gt; {
+            .then(patient => {
                 if (!patient) {
                     return res.status(404)
                         .json('Patient not found');
@@ -46,26 +46,26 @@ router.route('/update/:id')
                 patient.gender = req.body.gender;
 
                 patient.save()
-                    .then(() =&gt; res.json('Patient updated!'))
-                    .catch(err =&gt; res.status(400)
+                    .then(() => res.json('Patient updated!'))
+                    .catch(err => res.status(400)
                         .json('Error: ' + err));
             })
-            .catch(err =&gt; res.status(400)
+            .catch(err => res.status(400)
                 .json('Error: ' + err));
     });
 
 // Delete patient by ID
 router.route('/delete/:id')
-    .delete((req, res) =&gt; {
+    .delete((req, res) => {
         Patient.findByIdAndDelete(req.params.id)
-            .then(patient =&gt; {
+            .then(patient => {
                 if (!patient) {
                     return res.status(404)
                         .json('Patient not found');
                 }
                 res.json('Patient deleted!');
             })
-            .catch(err =&gt; res.status(400)
+            .catch(err => res.status(400)
                 .json('Error: ' + err));
     });
 
