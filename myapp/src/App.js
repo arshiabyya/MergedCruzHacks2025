@@ -1,91 +1,41 @@
-/*import logo from './logo.svg';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
+import Header from './components/Header.js';
+import ClubCard from './components/ClubCard.js';
+import AddEvent from './pages/AddEvent.js';
+
 
 function App() {
+  // Sample club data
+  const clubs = [
+    { id: 1, title: 'Club', topic: 'Topic', event: 'Event', location: 'Location', description: 'Description' },
+    { id: 2, title: 'Club', topic: 'Topic', event: 'Event', location: 'Location', description: 'Description' },
+    { id: 3, title: 'Club', topic: 'Topic', event: 'Event', location: 'Location', description: 'Description' },
+    { id: 4, title: 'Club', topic: 'Topic', event: 'Event', location: 'Location', description: 'Description' },
+    { id: 5, title: 'Club', topic: 'Topic', event: 'Event', location: 'Location', description: 'Description' },
+    { id: 6, title: 'Club', topic: 'Topic', event: 'Event', location: 'Location', description: 'Description' },
+    { id: 7, title: 'Club', topic: 'Topic', event: 'Event', location: 'Location', description: 'Description' },
+    { id: 8, title: 'Club', topic: 'Topic', event: 'Event', location: 'Location', description: 'Description' },
+  ];
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/add-event" element={<AddEvent />} />
+        <Route path="/" element={
+          <div className="app-container">
+            <Header />
+            <main className="club-grid">
+              {clubs.map((club) => (
+                <ClubCard key={club.id} club={club} />
+              ))}
+            </main>
+          </div>
+        } />
+      </Routes>
+    </Router>
   );
 }
 
-export default App;*/
-//App.js
-
-import React from 'react';
-import {
-    BrowserRouter as Router,
-    Routes, Route,
-    Link, useNavigate
-} from 'react-router-dom';
-import Appointments
-    from './components/Appointments';
-import Doctors from './components/Doctors';
-import Patients from './components/Patients';
-import './App.css'
-
-const App = () => {
-    const isLinkActive =
-        (path) =>
-            window.location.pathname === path;
-    return (
-        <Router>
-            <div className="container">
-                <h1 style={{ color: "green" }}>
-                    GFG- Hospital Managment App
-                </h1>
-                <nav>
-                    <ul>
-                        <li className={
-                            isLinkActive('/appointments')
-                                ? 'active' : ''}>
-                            <Link to="/appointments">
-                                Appointments</Link>
-                        </li>
-                        <li className={
-                            isLinkActive('/doctors') ?
-                                'active' : ''}>
-                            <Link to="/doctors">
-                                Doctors
-                            </Link>
-                        </li>
-                        <li className={
-                            isLinkActive('/patients') ?
-                                'active' : ''}>
-                            <Link to="/patients">
-                                Patients
-                            </Link>
-                        </li>
-                    </ul>
-                </nav>
-
-                <Routes>
-                    <Route path="/appointments"
-                        element={<Appointments />} />
-                    <Route path="/"
-                        element={<Appointments />} />
-                    <Route path="/doctors"
-                        element={<Doctors />} />
-                    <Route path="/patients"
-                        element={<Patients />} />
-                </Routes>
-            </div>
-        </Router>
-    );
-}
-
 export default App;
-
